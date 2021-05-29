@@ -1,17 +1,20 @@
+"use strict"
+
 class ProductList {
 	_goods;
 	_allProducts;
+	_summ;
 	constructor(container = '.products') {
 		this.container = container;
-		this.#goods = [];
-		this.#allProducts = [];
+		this._goods = [];
+		this._allProducts = [];
 
-		this.#fetchGoods();
-		this.#render();
+		this._fetchGoods();
+		this._render();
 	}
 
 	_fetchGoods() {
-		this.#goods = [{
+		this._goods = [{
 				id: 1,
 				title: 'Notebook',
 				price: 20000
@@ -37,12 +40,20 @@ class ProductList {
 	_render() {
 		const block = document.querySelector(this.container);
 
-		for (let product of this.#goods) {
+		for (let product of this._goods) {
 			const productObject = new ProductItem(product);
 
-			this.#allProducts.push(productObject);
+			this._allProducts.push(productObject);
 			block.insertAdjacentHTML('beforeend', productObject.render());
 		}
+	}
+
+	get summAllProducts() {
+		let summ = 0;
+		for (let prod of this._goods) {
+			summ += prod.price
+		}
+		return summ
 	}
 }
 
@@ -67,3 +78,19 @@ class ProductItem {
 }
 
 const catalog = new ProductList();
+// let s = catalog.summAllProducts
+
+class CartProductList extends ProductList {
+	/*
+	метод очистки корзины
+	метод продолжить покупки
+	*/
+}
+class CartProductItem extends ProductItem {
+	/*
+	метод удаления товара из корзины
+	метод изменения количества товара и пересчета суммы
+	метод добавления в список желаний
+	возможно другой метод вывода карточки товара на страницу
+	*/
+}
