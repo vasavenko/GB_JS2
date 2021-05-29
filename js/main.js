@@ -78,7 +78,7 @@ class ProductItem {
 }
 
 const catalog = new ProductList();
-let s = catalog.summAllProducts
+// let s = catalog.summAllProducts
 
 class CartProductList extends ProductList {
 	/*
